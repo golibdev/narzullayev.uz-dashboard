@@ -24,9 +24,7 @@ export const LoginPage = () => {
          const res = await login(username, password);
          const { message } = res;
          if(res.status === 200) {
-            setTimeout(() => {
-               navigate('/admin');
-            }, 2000);
+            navigate('/admin')
             return toast.success(message);
          } else {
             return toast.error(message);
