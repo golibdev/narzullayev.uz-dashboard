@@ -9,7 +9,6 @@ import { UpdateEditor } from '../../components/TextEditor/UpdateEditor';
 
 export const BlogUpdate = () => {
    const slugify = useParams().id;
-   const [loading, setLoading] = useState(false);
    const [categories, setCategories] = useState([]);
    const [blog, setBlog] = useState({})
    const content = useRef(null);
@@ -22,7 +21,6 @@ export const BlogUpdate = () => {
       try {
          const res = await categoryApi.getAll();
          setCategories(res.data.categories);
-         setLoading(true);
       } catch (err) {}
    }
 
@@ -57,7 +55,7 @@ export const BlogUpdate = () => {
       params.append('shortContent', shortContent ? shortContent : blog.shortContent);
       params.append('image', image ? image : blog.image);
       params.append('category', categoryName ? categoryName : blog.category);
-      params.append('content', content.current?.getContent() ? content.current?.getContent() : blog.content);
+      params.append('content', content?.current?.getContent() ? content?.current?.getContent() : blog?.content);
       try {
          const res = await blogApi.update(slugify, params);
          const message = await res.data.message

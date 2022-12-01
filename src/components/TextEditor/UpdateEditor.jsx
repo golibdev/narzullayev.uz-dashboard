@@ -5,7 +5,7 @@ export const UpdateEditor = ({ content, blog }) => {
    return (
       <Editor
          onInit={(e, editor) => content.current = editor}
-         initialValue={content.current ? content.current.getContent() : blog.content}
+         initialValue={blog?.content}
          init={{
             height: 450,
             menubar: true,

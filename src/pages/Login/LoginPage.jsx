@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth';
 
 export const LoginPage = () => {
-   const navigate = useNavigate();
    const [username, setUsername] = useState('')
    const [password, setPassword] = useState('')
    const { login } = useAuth();
@@ -24,8 +22,7 @@ export const LoginPage = () => {
          const res = await login(username, password);
          const { message } = res;
          if(res.status === 200) {
-            navigate('/admin')
-            return toast.success(message);
+            window.location.href = '/admin';
          } else {
             return toast.error(message);
          }
