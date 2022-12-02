@@ -11,6 +11,9 @@ export const UpdateEditor = ({ content, blog }) => {
             menubar: true,
             plugins: 'link image code media',
             content_style: 'img { width: 100%; height: auto; object-fit: cover }' ,
+            mobile: {
+               menubar: true
+            },
             paste_data_images: true,
             file_browser_callback_types: 'image',
             file_picker_callback: function (cb, value, meta) {

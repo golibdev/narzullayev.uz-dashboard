@@ -11,6 +11,9 @@ export const TextEditor = ({ content }) => {
             plugins: 'link image code media',
             content_style: 'img { width: 100%; height: auto; object-fit: cover }',
             paste_data_images: true,
+            mobile: {
+               menubar: true
+            },
             file_browser_callback_types: 'image',
             file_picker_callback: function (cb, value, meta) {
                var input = document.createElement("input");
