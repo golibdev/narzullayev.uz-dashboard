@@ -2,9 +2,10 @@
    border-radius: 5px !important;
 }
 
-p img {
-   width: 100% !important;
-   object-fit: cover !important;
+img {
+   width: 100%;
+   height: auto;
+   object-fit: cover;
 }
 
 textarea {

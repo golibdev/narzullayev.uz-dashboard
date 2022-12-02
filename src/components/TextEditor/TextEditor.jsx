@@ -9,7 +9,7 @@ export const TextEditor = ({ content }) => {
             height: 450,
             menubar: true,
             plugins: 'link image code media',
-            content_style: 'body { font-family: Helvetica,Arial,sans-serif; font-size: 14px }',
+            content_style: 'img { width: 100%; height: auto; object-fit: cover }',
             paste_data_images: true,
             file_browser_callback_types: 'image',
             file_picker_callback: function (cb, value, meta) {
