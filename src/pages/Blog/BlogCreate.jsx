@@ -11,8 +11,8 @@ export const BlogCreate = () => {
    const [categories, setCategories] = useState([]);
    const content = useRef(null);
    const [title, setTitle] = useState('');
-   const [categoryName, setCategoryName] = useState('');
-   const [image, setImage] = useState('');
+   const categoryName = useRef(null);
+   const image = useRef(null);
    const [shortContent, setShortContent] = useState('');
 
    const getCategories = async () => {
@@ -33,42 +33,39 @@ export const BlogCreate = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-
       const check = {
          titleExist: title.trim().length === 0,
          shortContentExist: shortContent.trim().length === 0,
          contentExist: content.current?.getContent() ? content.current.getContent().trim().length === 0 : true,
-         categoryNameExists: categoryName.trim().length === 0
+         categoryNameExists: categoryName.current.state.ariaSelection.value.value.trim().length === 0
       }
 
       const { titleExist, shortContentExist, contentExist, categoryNameExists } = check;
 
       if(titleExist || shortContentExist || contentExist || categoryNameExists) {
          return toast.warning("Barcha maydonlarni to'ldiring!");
-      }
+      };
 
       const params = new FormData();
 
       params.append('title', title);
       params.append('shortContent', shortContent);
-      params.append('category', categoryName);
-      params.append('image', image);
+      params.append('category', categoryName.current.state.ariaSelection.value.value);
+      params.append('image', image.current.files[0]);
       params.append('content', content.current?.getContent());
       try {
          const res = await blogApi.create(params);
          const message = await res.data.message
          toast.success(message);
          setTitle('');
-         setCategoryName('');
-         setImage('');
          setShortContent('');
+         image.current.value = ''
          content.current.setContent('');
+         categoryName.current.clearValue();
       } catch (err) {
-         console.log(err);
          toast.error(err.response.data.message);
       }
    }
-
    return (
       <div className='main-panel'>
          <div className='content-wrapper'>
@@ -114,7 +111,7 @@ export const BlogCreate = () => {
                            <label htmlFor="categoryName">Kategoriya</label>
                            {categories ? <Select 
                               options={options}
-                              onChange={e => setCategoryName(e.value)}
+                              ref={categoryName}
                               isOptionSelected
                               id='categoryName'
                            /> : <Skeleton baseColor='#ddd8d8' width={'100%'} />}
@@ -125,7 +122,7 @@ export const BlogCreate = () => {
                               type="file" 
                               className="form-control-file" 
                               id="image"
-                              onChange={e => setImage(e.target.files[0])}
+                              ref={image}
                            />
                         </div>
                      </div>
