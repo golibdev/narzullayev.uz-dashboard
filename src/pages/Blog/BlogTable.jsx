@@ -39,7 +39,7 @@ export const BlogTable = ({ getData, data, loading }) => {
                   <tr key={item._id}>
                      <td title={item.title}>{!item.title ? <Skeleton baseColor='#ddd8d8' width={'100%'} count={2} /> : item.title}</td>
                      <td title={item.category.categoryName}>{!item.category ? <Skeleton baseColor='#ddd8d8' width={'100%'} count={2} /> : item.category.categoryName}</td>
-                     <td title={item.views}>{!item.views ? <Skeleton baseColor='#ddd8d8' width={'100%'} count={2} /> : item.views}</td>
+                     <td title={item.views}>{!item.title ? <Skeleton baseColor='#ddd8d8' width={'100%'} count={2} /> : item.views}</td>
                      <td title={item.title}>{!item.createdAt ? <Skeleton baseColor='#ddd8d8' width={'100%'} count={2} /> : moment(item.createdAt).format('DD.MM.YYYY HH:mm:ss')}</td>
                      <td title="Tahrirlash">
                         {!item._id ? 
